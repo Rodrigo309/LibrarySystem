@@ -14,10 +14,11 @@ public class Main {
 
     @Autowired
     private LivroService livroService;
+    Scanner scanner = new Scanner(System.in);
 
     @EventListener(ApplicationReadyEvent.class)
     public void iniciar(){
-        Scanner scanner = new Scanner(System.in);
+
         int opcao;
 
         do {
@@ -26,8 +27,10 @@ public class Main {
             scanner.nextLine();
 
             switch (opcao){
-                case 1 -> cadastrarLivro(scanner);
+                case 1 -> cadastrarLivro();
                 case 2 -> listarLivros();
+                case 3 -> realizarEmprestimo();
+                case 4 -> registrarDevolucao();
                 case 0 -> System.out.println("Saindo do sistema. . .");
                 default -> System.out.println("Opcao invalida");
             }
@@ -40,11 +43,13 @@ public class Main {
         System.out.println("=== Sistema de Biblioteca ===");
         System.out.println("1 - Cadastrar Livro");
         System.out.println("2 - Listar Livros");
+        System.out.println("3 - Realizar Empréstimo");
+        System.out.println("4 - Registrar Devolução");
         System.out.println("0 - Sair");
         System.out.print("Escolha uma opção: ");
     }
 
-    private void cadastrarLivro(Scanner scanner){
+    private void cadastrarLivro(){
         System.out.println("=== Cadastro de Livro ===");
         System.out.print("Título: ");
         String titulo = scanner.nextLine();
@@ -75,5 +80,35 @@ public class Main {
         livroService.listarTodos().forEach(livro ->
                 System.out.println(livro.getId() + " - " + livro.getTitulo() + " por " + livro.getAutor())
         );
+    }
+
+    private void realizarEmprestimo(){
+        System.out.println("=== Realizar Empréstimo ===");
+        System.out.print("ID do Livro: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();
+
+        boolean sucesso = livroService.emprestarLivro(id);
+
+        if(sucesso){
+            System.out.println("Empréstimo realizado com sucesso!");
+        }else{
+            System.out.println("Não foi possível realizar o empréstimo. Verifique o ID ou a disponibilidade.");
+        }
+    }
+
+    private void registrarDevolucao(){
+        System.out.println("=== Registrar Devolução ===");
+        System.out.print("ID do Livro: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();
+
+        boolean sucesso = livroService.devolverLivro(id);
+
+        if (sucesso) {
+            System.out.println("Devolução registrada com sucesso!");
+        } else {
+            System.out.println("Não foi possível registrar a devolução. Verifique o ID.");
+        }
     }
 }

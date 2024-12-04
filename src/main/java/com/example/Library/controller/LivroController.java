@@ -1,7 +1,7 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.Livro;
-import com.example.Library.service.LivroService;
+import com.example.Library.service.LivroServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/livros")
 public class LivroController {
     @Autowired
-    private LivroService livroService;
+    private LivroServiceImp livroService;
 
     @PostMapping
     public Livro cadastrar(@RequestBody Livro livro){

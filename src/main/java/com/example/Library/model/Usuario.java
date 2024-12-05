@@ -15,7 +15,7 @@ public class Usuario {
     private String email;
     private String cpf;
 
-    @OneToMany(mappedBy = "Usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Emprestimo> emprestimos = new ArrayList<>();
 
     public String getNome() {
@@ -40,6 +40,14 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<Emprestimo> getEmprestimos() {

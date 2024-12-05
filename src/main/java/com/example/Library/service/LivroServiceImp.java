@@ -21,9 +21,10 @@ public class LivroServiceImp implements LivroService {
         return livroRepository.findAll();
     }
 
-    public Optional<Livro> buscarPorId(Long id){
+    public Optional<Livro> buscarPorId(Long id) {
         return livroRepository.findById(id);
     }
+
 
     public boolean emprestarLivro(Long id){
         Optional<Livro> optionalLivro = livroRepository.findById(id);

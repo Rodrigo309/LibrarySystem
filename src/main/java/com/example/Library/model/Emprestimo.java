@@ -12,7 +12,7 @@ public class Emprestimo {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "usuario_id") // Nome da coluna no banco de dados
     private Usuario usuario;
 
 
